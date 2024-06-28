@@ -1,4 +1,5 @@
 <script>
+    import Seo from 'sk-seo';
 	import { cubicInOut } from 'svelte/easing';
 	import fadeScale from '$lib/intro';
 	let initialLoan = 3_000_000;
@@ -56,8 +57,16 @@
 
 		return baseRate;
 	}
+    const title = "Amorterings kalkylator"
 </script>
-
+<svelte:head>
+    <title>{title}</title>
+</svelte:head>
+<Seo 
+  {title}
+  description="Kalkylator för att räkna ut hur mycket du ska betala i månaden i amortering"
+  keywords="amortering, räkna, lån, online, kalkylator"
+/>
 <main>
 	<div>
 		<p>
@@ -65,7 +74,7 @@
 				type="number"
 				bind:value={initialLoan}
 				placeholder="kr"
-				class="input w-full max-w-32"
+				class="input w-full max-w-32 text-secondary"
 			/>kr.
 		</p>
 		<p>
@@ -73,7 +82,7 @@
 				type="number"
 				bind:value={salary}
 				placeholder="kr"
-				class="input w-full max-w-32"
+				class="input w-full max-w-32 text-secondary"
 			/>kr i månaden i bruttolön.
 		</p>
 		<p>
@@ -81,7 +90,7 @@
 				type="number"
 				bind:value
 				placeholder="kr"
-				class="input w-full max-w-32"
+				class="input w-full max-w-32 text-secondary"
 			/>kr.
 		</p>
 		<p>

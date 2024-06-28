@@ -149,7 +149,7 @@
 					<p>
 						Du betalar <span class="text-accent">{Math.floor((0.01 * initialLoan) / 12)}</span>
 						extra per månad pga banken äger mer än 70% av bostaden. Sänk lånet till
-						<span class="text-accent">{Math.floor(value * 0.7)}</span> för att sänka amorteringen
+						med <span class="text-accent">{initialLoan-Math.floor(value * 0.7)}</span> till <span class="text-accent">{Math.floor(value * 0.7)}</span> för att sänka amorteringen
 					</p>
 				</div>
 			</div>

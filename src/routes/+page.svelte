@@ -1,10 +1,10 @@
 <script>
-    import Seo from 'sk-seo';
+	import Seo from 'sk-seo';
 	import { cubicInOut } from 'svelte/easing';
 	import fadeScale from '$lib/intro';
-	let initialLoan = 3_000_000;
-	let value = 3_600_000;
-	let salary = 52_000;
+	let initialLoan = undefined;
+	let value = undefined;
+	let salary = undefined;
 
 	$: loanPercentage = to2Digit(initialLoan / value) * 100;
 	$: mortgageAmount = calculateMortgageRate(loanPercentage, salary, initialLoan);
@@ -57,15 +57,16 @@
 
 		return baseRate;
 	}
-    const title = "Amorterings kalkylator"
+	const title = 'Amorterings kalkylator';
 </script>
+
 <svelte:head>
-    <title>{title}</title>
+	<title>{title}</title>
 </svelte:head>
-<Seo 
-  {title}
-  description="Kalkylator för att räkna ut hur mycket du ska betala i månaden i amortering"
-  keywords="amortering, räkna, lån, online, kalkylator"
+<Seo
+	{title}
+	description="Kalkylator för att räkna ut hur mycket du ska betala i månaden i amortering"
+	keywords="amortering, räkna, lån, online, kalkylator"
 />
 <main>
 	<div>
@@ -93,19 +94,22 @@
 				class="input w-full max-w-32 text-secondary"
 			/>kr.
 		</p>
-		<p>
-			Så bör du betala <span class="text-accent"
-				>{Math.floor((mortgageAmount * initialLoan) / 12)}</span
-			>
-			per månad, vilket motsvarar <span class="text-accent">{mortgageAmount * 100}%</span> av bostadens
-			värde.
-		</p>
+		{#if value > 0 && initialLoan > 0 && salary > 0}
+			<p>
+				Så bör du betala <span class="text-accent"
+					>{Math.floor((mortgageAmount * initialLoan) / 12)}</span
+				>
+				per månad, vilket motsvarar <span class="text-accent">{mortgageAmount * 100}%</span> av bostadens
+				värde.
+			</p>
+		{/if}
 	</div>
 
-	<div>
-		Banken äger <span class="text-accent">{loanPercentage}%</span> av din bostad.
-	</div>
-
+	{#if value > 0 && initialLoan > 0 && salary > 0}
+		<div>
+			Banken äger <span class="text-accent">{loanPercentage}%</span> av din bostad.
+		</div>
+	{/if}
 	<div class="flex gap-2 mt-12 flex-col md:flex-row">
 		{#if isLowSalary(salary, initialLoan)}
 			<div
@@ -151,6 +155,11 @@
 		{/if}
 	</div>
 </main>
+<footer class="footer footer-center bg-base-300 text-base-content p-4">
+	<aside>
+		<p>Denna kalkylator är ett hobbyprojekt och resultaten kan vara felaktiga. Använd på egen risk.</p>
+	</aside>
+</footer>
 
 <style lang="postcss">
 	p {

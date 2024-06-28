@@ -12,7 +12,8 @@
 			"extensions": [
 				"1YiB.svelte-bundle",
 				"arcticicestudio.nord-visual-studio-code",
-				"github.vscode-github-actions"
+				"github.vscode-github-actions",
+				"bradlc.vscode-tailwindcss"
 			]
 		}
 	}

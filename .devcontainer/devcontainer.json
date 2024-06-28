@@ -11,7 +11,8 @@
 		"vscode": {
 			"extensions": [
 				"1YiB.svelte-bundle",
-				"arcticicestudio.nord-visual-studio-code"
+				"arcticicestudio.nord-visual-studio-code",
+				"github.vscode-github-actions"
 			]
 		}
 	}

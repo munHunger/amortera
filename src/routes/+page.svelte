@@ -106,7 +106,7 @@
 		Banken äger <span class="text-accent">{loanPercentage}%</span> av din bostad.
 	</div>
 
-	<div class="flex gap-2 mt-12">
+	<div class="flex gap-2 mt-12 flex-col md:flex-row">
 		{#if isLowSalary(salary, initialLoan)}
 			<div
 				class="card bg-neutral text-neutral-content w-96"

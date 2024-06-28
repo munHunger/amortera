@@ -11,6 +11,25 @@
 	function to2Digit(val) {
 		return Math.floor(val * 100) / 100;
 	}
+
+    /**
+	 * @param {number} salary
+	 * @param {number} initialLoan
+     * @returns {boolean}
+	 */
+    function isLowSalary(salary, initialLoan) {
+		const loanThreshold = salary * 12 * 4.5;
+
+        return loanThreshold < initialLoan;
+    }
+
+    /**
+	 * @param {number} initialLoan
+	 */
+    function getSalaryThreshold(initialLoan) {
+        return initialLoan / 12 / 4.5;
+    }
+
 	/**
 	 * Calculates the mortgage rate based on loan percentage, salary, and initial loan amount.
 	 *
@@ -27,10 +46,9 @@
 	 * @returns {number} The calculated mortgage rate.
 	 */
 	function calculateMortgageRate(loanPercentage, salary, initialLoan) {
-		const loanThreshold = salary * 12 * 4.5;
 		const baseRate = loanPercentage > 70 ? 0.02 : loanPercentage > 50 ? 0.01 : 0;
 
-		if (loanThreshold < initialLoan) {
+		if (isLowSalary(salary, initialLoan)) {
 			return baseRate + 0.01;
 		}
 
@@ -65,7 +83,7 @@
 			/>kr.
 		</p>
 		<p>
-			Så bör du betala <span class="text-accent">{mortgageAmount * initialLoan / 12}</span> per månad, vilket motsvarar <span class="text-accent">{mortgageAmount * 100}%</span> av
+			Så bör du betala <span class="text-accent">{Math.floor(mortgageAmount * initialLoan / 12)}</span> per månad, vilket motsvarar <span class="text-accent">{mortgageAmount * 100}%</span> av
 			bostadens värde.
 		</p>
 	</div>
@@ -73,6 +91,17 @@
 	<div>
 		Banken äger <span class="text-accent">{loanPercentage}%</span> av din bostad.
 	</div>
+
+    {#if isLowSalary(salary, initialLoan)}
+        <div>
+            Du betalar <span class="text-accent">{Math.floor(0.01 * initialLoan / 12)}</span> extra per månad pga din låga lön i förhållande till lån. Höj lönen till <span class="text-accent">{Math.floor(getSalaryThreshold(initialLoan))}</span> eller sänk lånet till <span class="text-accent">{Math.floor(salary * 4.5 * 12)}</span> för att sänka amorteringen
+        </div>
+    {/if}
+    {#if loanPercentage > 70}
+        <div>
+            Du betalar <span class="text-accent">{Math.floor(0.01 * initialLoan / 12)}</span> extra per månad pga banken äger mer än 70% av bostaden. Sänk lånet till <span class="text-accent">{Math.floor(value * 0.70)}</span> för att sänka amorteringen
+        </div>
+    {/if}
 </main>
 
 <style lang="postcss">

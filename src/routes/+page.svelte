@@ -69,6 +69,7 @@
 	keywords="amortering, räkna, lån, online, kalkylator"
 />
 <main>
+    <h1 class="text-3xl text-accent mb-12">Räkna på din amorteringskostnad per månad</h1>
 	<div>
 		<p>
 			Om du har tagit ett lån på <input

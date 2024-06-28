@@ -45,7 +45,7 @@
 				type="number"
 				bind:value={initialLoan}
 				placeholder="kr"
-				class="input w-full max-w-xs"
+				class="input w-full max-w-32"
 			/>kr.
 		</p>
 		<p>
@@ -53,7 +53,7 @@
 				type="number"
 				bind:value={salary}
 				placeholder="kr"
-				class="input w-full max-w-xs"
+				class="input w-full max-w-32"
 			/>kr i månaden i bruttolön.
 		</p>
 		<p>
@@ -61,17 +61,17 @@
 				type="number"
 				bind:value
 				placeholder="kr"
-				class="input w-full max-w-xs"
+				class="input w-full max-w-32"
 			/>kr.
 		</p>
 		<p>
-			Så bör du betala {mortgageAmount * initialLoan}, vilket motsvarar {mortgageAmount * 100}% av
+			Så bör du betala <span class="text-accent">{mortgageAmount * initialLoan}</span>, vilket motsvarar <span class="text-accent">{mortgageAmount * 100}%</span> av
 			bostadens värde.
 		</p>
 	</div>
 
 	<div>
-		Banken äger {loanPercentage}% av din bostad.
+		Banken äger <span class="text-accent">{loanPercentage}%</span> av din bostad.
 	</div>
 </main>
 
@@ -83,6 +83,6 @@
 		@apply mx-1;
 	}
     main {
-        @apply flex items-center justify-center min-h-screen text-center;
+        @apply flex items-center justify-center min-h-screen text-center flex-col;
     }
 </style>

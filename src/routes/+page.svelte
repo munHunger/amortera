@@ -75,7 +75,7 @@
 			Om du har tagit ett lån på <input
 				type="number"
 				bind:value={initialLoan}
-				placeholder="kr"
+				placeholder="lån"
 				class="input w-full max-w-32 text-secondary"
 			/>kr.
 		</p>
@@ -83,7 +83,7 @@
 			Och du tjänar <input
 				type="number"
 				bind:value={salary}
-				placeholder="kr"
+				placeholder="lön"
 				class="input w-full max-w-32 text-secondary"
 			/>kr i månaden i bruttolön.
 		</p>
@@ -91,7 +91,7 @@
 			Med en bostadsvärdering på <input
 				type="number"
 				bind:value
-				placeholder="kr"
+				placeholder="värdering"
 				class="input w-full max-w-32 text-secondary"
 			/>kr.
 		</p>

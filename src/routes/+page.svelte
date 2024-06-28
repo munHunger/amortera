@@ -65,7 +65,7 @@
 			/>kr.
 		</p>
 		<p>
-			Så bör du betala <span class="text-accent">{mortgageAmount * initialLoan}</span>, vilket motsvarar <span class="text-accent">{mortgageAmount * 100}%</span> av
+			Så bör du betala <span class="text-accent">{mortgageAmount * initialLoan / 12}</span> per månad, vilket motsvarar <span class="text-accent">{mortgageAmount * 100}%</span> av
 			bostadens värde.
 		</p>
 	</div>

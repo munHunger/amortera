@@ -1,4 +1,6 @@
 <script>
+	import { cubicInOut } from 'svelte/easing';
+	import fadeScale from '$lib/intro';
 	let initialLoan = 3_000_000;
 	let value = 3_600_000;
 	let salary = 52_000;
@@ -12,23 +14,23 @@
 		return Math.floor(val * 100) / 100;
 	}
 
-    /**
+	/**
 	 * @param {number} salary
 	 * @param {number} initialLoan
-     * @returns {boolean}
+	 * @returns {boolean}
 	 */
-    function isLowSalary(salary, initialLoan) {
+	function isLowSalary(salary, initialLoan) {
 		const loanThreshold = salary * 12 * 4.5;
 
-        return loanThreshold < initialLoan;
-    }
+		return loanThreshold < initialLoan;
+	}
 
-    /**
+	/**
 	 * @param {number} initialLoan
 	 */
-    function getSalaryThreshold(initialLoan) {
-        return initialLoan / 12 / 4.5;
-    }
+	function getSalaryThreshold(initialLoan) {
+		return initialLoan / 12 / 4.5;
+	}
 
 	/**
 	 * Calculates the mortgage rate based on loan percentage, salary, and initial loan amount.
@@ -83,8 +85,11 @@
 			/>kr.
 		</p>
 		<p>
-			Så bör du betala <span class="text-accent">{Math.floor(mortgageAmount * initialLoan / 12)}</span> per månad, vilket motsvarar <span class="text-accent">{mortgageAmount * 100}%</span> av
-			bostadens värde.
+			Så bör du betala <span class="text-accent"
+				>{Math.floor((mortgageAmount * initialLoan) / 12)}</span
+			>
+			per månad, vilket motsvarar <span class="text-accent">{mortgageAmount * 100}%</span> av bostadens
+			värde.
 		</p>
 	</div>
 
@@ -92,16 +97,50 @@
 		Banken äger <span class="text-accent">{loanPercentage}%</span> av din bostad.
 	</div>
 
-    {#if isLowSalary(salary, initialLoan)}
-        <div>
-            Du betalar <span class="text-accent">{Math.floor(0.01 * initialLoan / 12)}</span> extra per månad pga din låga lön i förhållande till lån. Höj lönen till <span class="text-accent">{Math.floor(getSalaryThreshold(initialLoan))}</span> eller sänk lånet till <span class="text-accent">{Math.floor(salary * 4.5 * 12)}</span> för att sänka amorteringen
-        </div>
-    {/if}
-    {#if loanPercentage > 70}
-        <div>
-            Du betalar <span class="text-accent">{Math.floor(0.01 * initialLoan / 12)}</span> extra per månad pga banken äger mer än 70% av bostaden. Sänk lånet till <span class="text-accent">{Math.floor(value * 0.70)}</span> för att sänka amorteringen
-        </div>
-    {/if}
+	<div class="flex gap-2 mt-12">
+		{#if isLowSalary(salary, initialLoan)}
+			<div
+				class="card bg-neutral text-neutral-content w-96"
+				transition:fadeScale={{
+					delay: 0,
+					duration: 200,
+					easing: cubicInOut,
+					baseScale: 0.5
+				}}
+			>
+				<div class="card-body items-center text-center">
+					<h2 class="card-title">Högt lån</h2>
+					<p>
+						Du betalar <span class="text-accent">{Math.floor((0.01 * initialLoan) / 12)}</span>
+						extra per månad pga din låga lön i förhållande till lån. Höj lönen till
+						<span class="text-accent">{Math.floor(getSalaryThreshold(initialLoan))}</span>
+						eller sänk lånet till <span class="text-accent">{Math.floor(salary * 4.5 * 12)}</span> för
+						att sänka amorteringen
+					</p>
+				</div>
+			</div>
+		{/if}
+		{#if loanPercentage > 70}
+			<div
+				class="card bg-neutral text-neutral-content w-96"
+				transition:fadeScale={{
+					delay: 0,
+					duration: 200,
+					easing: cubicInOut,
+					baseScale: 0.5
+				}}
+			>
+				<div class="card-body items-center text-center">
+					<h2 class="card-title">Låg insats</h2>
+					<p>
+						Du betalar <span class="text-accent">{Math.floor((0.01 * initialLoan) / 12)}</span>
+						extra per månad pga banken äger mer än 70% av bostaden. Sänk lånet till
+						<span class="text-accent">{Math.floor(value * 0.7)}</span> för att sänka amorteringen
+					</p>
+				</div>
+			</div>
+		{/if}
+	</div>
 </main>
 
 <style lang="postcss">
@@ -111,7 +150,7 @@
 	input {
 		@apply mx-1;
 	}
-    main {
-        @apply flex items-center justify-center min-h-screen text-center flex-col;
-    }
+	main {
+		@apply flex items-center justify-center min-h-screen text-center flex-col;
+	}
 </style>

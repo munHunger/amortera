@@ -70,6 +70,7 @@
 />
 <main>
     <h1 class="text-3xl text-accent mb-12">Räkna på din amorteringskostnad per månad</h1>
+	<h3>Notera att detta ej är uppdaterat för amorteringskraven som träder i kraft första april 2026</h3>
 	<div>
 		<p>
 			Om du har tagit ett lån på <input
